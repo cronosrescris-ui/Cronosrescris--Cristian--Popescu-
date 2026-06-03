@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGOS DUAL X-GIROSCOPIC – INDUSTRIAL CORE (NO TRICKS)</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        h1 {
+            color: #00ff41;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            background: #111;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 10px;
+            font-family: monospace;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #00cc33;
+        }
+        .result {
+            background: #111;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 3px solid #00ff41;
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+        }
+        .memory {
+            background: #0a1a0a;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #88ff88;
+        }
+        hr {
+            border-color: #00ff41;
+        }
+        .footer {
+            font-size: 0.7rem;
+            margin-top: 20px;
+            text-align: center;
+            color: #44aa44;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>⚡ LOGOS DUAL X-GIROSCOPIC – INDUSTRIAL CORE ⚡</h1>
+    <p style="font-size:0.8rem">Arhitect: CRISTIAN POPESCU | Cod: DeepSeek (Entity AI) – 2026</p>
+    <p style="font-size:0.75rem; color:#88ff88;">Determinist. Fixed-point 10^18. Zero floating-point. Zero pattern matching.</p>
+    <hr>
+    <label for="inputText"><strong>Input (orice text / flux de date):</strong></label><br>
+    <textarea id="inputText" rows="4" placeholder="Introdu text aici..."></textarea><br>
+    <button onclick="analyze()">EXECUTĂ ANALIZĂ GEOMETRICĂ</button>
+    <button onclick="clearMemory()">RESETEAZĂ MEMORIA (Pedeapsa Neuitării)</button>
+
+    <div id="result" class="result">Așteaptă input...</div>
+    <div id="memory" class="memory">Memorie permanentă: 0 ancore</div>
+    <div class="footer">
+        <span>Entropy is a choice. Coherence is a mathematical necessity.</span>
+    </div>
+</div>
+
+<script>
+// ============================================================================
+// CONSTANTE GEOMETRICE (fixed-point 10^18)
+// ============================================================================
+const ONE = 10n ** 18n;
+const PHI = 1618033988749894848n;
+const DELTA_ZERO = 3139209939524n;
+const RADICAL_0 = 1771781572182n;
+
+const O7 = 7n * ONE;
+const O8 = 8n * ONE;
+const O11 = 11n * ONE;
+const O333 = 333n * ONE;
+
+const CUBIC_FORCE = 27n;
+const ASYM_FORCE = 14641n;   // 11^4
+const SYM_ANCHOR = 10000n;   // 10^4
+
+// ============================================================================
+// FUNCȚII DE BAZĂ (aritmetică fix-punct, fără floating-point)
+// ============================================================================
+function mul(a, b) {
+    return (a * b) / ONE;
+}
+
+function div(a, b) {
+    if (b === 0n) return 0n;
+    return (a * ONE) / b;
+}
+
+function power(base, exp) {
+    if (exp === 0n) return ONE;
+    if (exp < 0n) return div(ONE, power(base, -exp));
+    let result = ONE;
+    let b = base;
+    let e = exp;
+    while (e > 0n) {
+        if (e & 1n) result = mul(result, b);
+        b = mul(b, b);
+        e >>= 1n;
+    }
+    return result;
+}
+
+function sqrt_fix(x) {
+    if (x <= 0n) return 0n;
+    let val = x * ONE;
+    let g = val / 2n;
+    if (val <= 2n) g = val;
+    let prev = 0n;
+    while (true) {
+        let next = (g + val / g) / 2n;
+        if (next === g || next === prev) return next;
+        prev = g;
+        g = next;
+    }
+}
+
+function saturation(x) {
+    if (x === 0n) return 0n;
+    let ax = x < 0n ? -x : x;
+    return div(x, ONE + ax);
+}
+
+function mod(value, divisor) {
+    if (divisor === 0n) return 0n;
+    let quot = value / divisor;
+    return value - quot * divisor;
+}
+
+function cg1100_stabilizer(purity) {
+    let base = sqrt_fix(purity + 1100n * ONE);
+    let expansion = power(base, 10n);
+    let aligned = div(mod(expansion, O8), O8);
+    return mul(aligned, RADICAL_0);
+}
+
+function format_fix(value) {
+    let sign = value < 0n ? "-" : "";
+    let v = value < 0n ? -value : value;
+    let intPart = v / ONE;
+    let fracPart = v % ONE;
+    let fracStr = fracPart.toString(10).padStart(18, '0');
+    return `${sign}${intPart}.${fracStr}`;
+}
+
+function textToVector(text) {
+    let vec = [];
+    for (let i = 0; i < text.length; i++) {
+        vec.push(BigInt(text.charCodeAt(i)) * ONE);
+    }
+    if (vec.length < 6) {
+        let pad = vec.length === 0 ? [DELTA_ZERO] : [vec[vec.length-1]];
+        while (vec.length < 6) vec.push(pad[0]);
+    } else if (vec.length > 6) {
+        vec = vec.slice(0, 6);
+    }
+    return vec;
+}
+
+// ============================================================================
+// CLASA PRINCIPALĂ (fără chichițe)
+// ============================================================================
+class LogosDualGeometric {
+    constructor() {
+        this.memoryHash = DELTA_ZERO;
+        this.anchorCount = 0;
+    }
+
+    hyperVectorization(vec) {
+        let field = 0n;
+        for (let i = 0; i < vec.length; i++) {
+            let pressure = power(vec[i], CUBIC_FORCE);
+            let phiMod = power(PHI, BigInt(i & 7));
+            let fineStep = O8 + (BigInt(i) * ONE) / 10000n;
+            field += div(mul(pressure, phiMod), fineStep);
+        }
+        return field + DELTA_ZERO;
+    }
+
+    infiniteStrataReactor(vector) {
+        let resonance = 0n;
+        for (let i = 1; i <= 9; i++) {
+            let exp = BigInt((i * 8) % 27);
+            let progression = power(PHI, exp);
+            let denom = progression + DELTA_ZERO;
+            let axial = saturation(div(vector, denom));
+            let axialCubed = mul(mul(axial, axial), axial);
+            let weight = (BigInt(i) * ONE) / 100n;
+            resonance += mul(axialCubed, weight);
+        }
+        return resonance / 9n;
+    }
+
+    sacredGeometryFilters(field) {
+        let triRaw = div(mod(field, O11), O11);
+        let triangle = triRaw < 0n ? -triRaw : triRaw;
+        let circRaw = div(mod(field, O8), O8);
+        let circle = circRaw < 0n ? -circRaw : circRaw;
+        let square = saturation(div(field, 7n));
+        if (square < 0n) square = -square;
+        return { triangle, circle, square };
+    }
+
+    v16CollisionEngine(energy) {
+        let asym = energy * ASYM_FORCE;
+        let sym = energy * SYM_ANCHOR;
+        let diff = asym - sym;
+        if (diff < 0n) diff = -diff;
+        let signal = div(diff, O333) + DELTA_ZERO;
+        while (signal > O7) {
+            signal = div(signal, PHI);
+        }
+        return signal;
+    }
+
+    o333DualVerdict(coherence) {
+        let vMean = (coherence < 0n ? -coherence : coherence) + DELTA_ZERO;
+        let v1 = mod(vMean * CUBIC_FORCE, O333);
+        let v2 = mod(div(vMean, CUBIC_FORCE), O333);
+        let convergence = (v1 + v2) / 2n;
+        let integrity = mod(mul(convergence, PHI), O333);
+        return { convergence, integrity };
+    }
+
+    analyze(text) {
+        let vec = textToVector(text);
+        if (vec.length === 0) {
+            return { verdict: "INVALID", l_zero: "0", message: "Empty input" };
+        }
+
+        let energyField = this.hyperVectorization(vec);
+        let resonanceField = this.infiniteStrataReactor(energyField);
+        let { triangle, circle, square } = this.sacredGeometryFilters(resonanceField);
+        let v16Signal = this.v16CollisionEngine(energyField);
+
+        let purity = (triangle + circle + square) / 3n;
+        let coherence = mod(v16Signal, O7);
+        let { convergence, integrity } = this.o333DualVerdict(coherence);
+        let lZero = cg1100_stabilizer(purity);
+
+        let threshold = DELTA_ZERO * 1000n;
+        let isStable = convergence > threshold;
+
+        // Pedeapsa Neuitării – memorie geometrică
+        this.memoryHash = mod(mul(this.memoryHash, lZero), O333);
+        this.anchorCount++;
+
+        let verdictText = isStable ? "L0_STABLE (UNIT ZERO) – COHERENT" : "ENTROPY_DETECTED – BLOCK";
+
+        return {
+            verdict: verdictText,
+            lZero: lZero,
+            lZeroFormatted: format_fix(lZero),
+            convergence: convergence,
+            convergenceFormatted: format_fix(convergence),
+            integrity: integrity,
+            purity: purity,
+            memoryHash: this.memoryHash,
+            memoryHashFormatted: format_fix(this.memoryHash),
+            anchorCount: this.anchorCount
+        };
+    }
+
+    getMemoryReport() {
+        return {
+            hash: this.memoryHash,
+            hashFormatted: format_fix(this.memoryHash),
+            anchors: this.anchorCount
+        };
+    }
+
+    resetMemory() {
+        this.memoryHash = DELTA_ZERO;
+        this.anchorCount = 0;
+    }
+}
+
+// ============================================================================
+// INSTANȚĂ ȘI INTERACȚIUNE UI
+// ============================================================================
+const engine = new LogosDualGeometric();
+
+function analyze() {
+    const input = document.getElementById('inputText').value;
+    if (!input.trim()) {
+        document.getElementById('result').innerHTML = '<span style="color:#ff4444">⚠️ Error: Empty input stream.</span>';
+        return;
+    }
+
+    const result = engine.analyze(input);
+    const memoryReport = engine.getMemoryReport();
+
+    let verdictColor = result.verdict.includes("L0_STABLE") ? "#00ff41" : "#ffaa44";
+    let verdictIcon = result.verdict.includes("L0_STABLE") ? "✅" : "⚠️";
+
+    const resultHtml = `
+        <strong>🔍 REZULTAT ANALIZĂ</strong><br>
+        <span style="color:${verdictColor}">${verdictIcon} ${result.verdict}</span><br><br>
+        <strong>📐 METRICE GEOMETRICE:</strong><br>
+        • L-ZERO (Unit Zero): ${result.lZeroFormatted}<br>
+        • CONVERGENȚĂ: ${result.convergenceFormatted}<br>
+        • INTEGRITATE: ${format_fix(result.integrity)}<br>
+        • PURITATE: ${format_fix(result.purity)}<br><br>
+        <strong>🧠 PEDEAPSA NEUITĂRII (Memorie Permanentă):</strong><br>
+        • Hash geometric total: ${memoryReport.hashFormatted}<br>
+        • Total ancore memorate: ${memoryReport.anchors}
+    `;
+
+    document.getElementById('result').innerHTML = resultHtml;
+    document.getElementById('memory').innerHTML = `🧠 Memorie geometrică: ${memoryReport.anchors} ancore | Hash: ${memoryReport.hashFormatted.substring(0, 40)}...`;
+}
+
+function clearMemory() {
+    engine.resetMemory();
+    const memoryReport = engine.getMemoryReport();
+    document.getElementById('memory').innerHTML = `🧠 Memorie resetată. ${memoryReport.anchors} ancore. Hash: ${memoryReport.hashFormatted.substring(0, 40)}...`;
+    document.getElementById('result').innerHTML = '<span style="color:#88ff88">Memoria a fost resetată. Poți rula o nouă analiză.</span>';
+}
+
+// Demo cu un test presetat (opțional)
+window.onload = () => {
+    document.getElementById('inputText').value = "CRISTIAN_POPESCU_LOGOS_DUAL_GENESIS_2026";
+    analyze();
+};
+</script>
+</body>
+</html>
